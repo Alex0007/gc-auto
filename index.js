@@ -19,7 +19,6 @@ var MemCleaner = (function() {
     }
 
     var createInstance = function(interval) {
-        interval = interval || 30000
 
         if (interval < 1000) {
             console.log('gc cleaner interval set to 1 second')
@@ -35,6 +34,9 @@ var MemCleaner = (function() {
     instance = set(30000)
 
     return function Construct_singletone(interval) {
+        if (!global.gc) return
+        
+        interval = parseInt(interval) || 30000
 
         console.log('Setting garbage collector periodic task with interval', interval, 'ms')
 
